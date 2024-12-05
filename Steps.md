@@ -109,7 +109,7 @@ server.listen(port, () => {
 function connectToDB(){
     mongoose.connect(process.env.DB_CONNECT)
         .then(() => {
-            console.log("Connected to DB");
+            console.log(" ");
         })
         .catch(err => console.log(err))
 }
@@ -127,8 +127,115 @@ function connectToDB(){
 -> Code: connectToDB();
 => We call the variable which contains our function for making DB connection.
 
+###Success: We are successfully connected to our application with a local Database.
 
-Last: 11:00
+#Step 29:
+-> Create Folder: models
+=> We create a folder named 'models' in the root of our application. We make schemas in this folder.
+
+#Step 30:
+-> Create File: models > user.model.js
+=> We crate a file for write our schema for user.
+
+#Step 31:
+-> Command: npm i bcrypt
+=> we install 'bcrypt' for hashing password.
+
+#Step 32: 
+-> Command: npm i jsonwebtoken
+=> we install 'jsonwebtoken' for making a secure authentication.
+
+#Step 33:
+-> Code: const bcrypt = require('bcrypt')
+-> Code: const jwt = require('jsonwebtoken')
+=> we require both bcrypt and jwt in out user.model.js file
+
+#Step 34:
+=> We create methods in our user.model.js file with bcrypt & jwt
+
+#Step 35:
+-> Code: const userModel = mongoose.model('user', userSchema)
+=> Finally we create model for our user.
+
+#Step 36:
+-> Code: module.exports = userModel
+=> We export our user model.
+
+#Step 37:
+-> Create Folder: Controllers
+=> We create a folder named 'Controllers' in the root of our application.
+
+#Step 38:
+-> Create File: Controllers > user.controller.js
+=> We make a controller for user model
+
+#Step 39:
+-> Code: const userModel = require('../models/user.model')
+=> We require userModel in our user.controller.js file
+
+#Step 40:
+-> Create Folder & File: routes > user.routes.js
+=> We create a Folder named 'routes' and a file named 'user.routes.js'
+
+#Step 41: 
+-> Code: const express = require('express');
+-> Code: const router = express.Router();
+=> We require express in our user.routes.js file and call the Router function of express.
+
+#Step 42:
+-> module.exports = router;
+=> We export our router contained variable from user.routes.js file for further use.
+
+#Step 43:
+-> Command: npm i express-validator
+=> We install express-validator in our project. This is use for validate the user input in express application.
+
+#Step 44:
+-> Code: const { body} = require('express-validator')
+=> we require body from express-validator
+
+#Step 45:
+=> we validate our data with express-validator in user.routes.js file
+
+#Step 46:
+-> Create Folder & File: Services > user.service.js
+=> We create a folder named 'Services' and a file named 'user.service.js'
+
+#Step 47:
+-> Code: const userModel = require('../models/user.model')
+=> we Require userModel in user.service.js file
+
+#Step 48:
+=> we create createUser function in user.service.js
+
+#Step 49:
+-> const userService = require('../Services/user.service')
+=> we require our createUser function in variable named 'userService' on user.controller.js file
+
+#Step 50:
+-> const { validationResult } = require('express-validator')
+=> we require validationResult from 'express-validator' in user.controller.js file
+
+#Step 51:
+=> we make registerUser function in user.controller.js file
+
+#Step 52:
+=> Insider registerUser function we hashed our password and generate our JWT Token
+
+#Step 53:
+-> Code: const userRoutes = require('./routes/user.routes')
+=> we require user.routes.js in our app.js file in a variable named userRoutes
+
+#Step 54:
+-> Code: app.use(express.json())
+=> we use express.json() in our application
+
+#Step 55: 
+-> Code: app.use('/user', userRoutes)
+=> we configure our userRoutes with our application
+
+
+
 
 
 
